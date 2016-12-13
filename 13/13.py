@@ -12,19 +12,10 @@ def find_wall(x, y):
 	else:
 		return u"\u2588"
 		
-def search(x, y):
-	if grid[x][y] == u"\u2591" or grid[x][y] == " ":
-		return True
-	else:
-		return False
-	grid[x][y] = u"\u00b7"
-
-
 for i in range(len(grid)):
 	for j in range(len(grid)):
 		grid[i].append(find_wall(i, j))
 
 grid[31][39] = u"\u2591"
-grid[1][1] = u"\u00b7"
 
 pr_gr()
