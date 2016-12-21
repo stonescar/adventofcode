@@ -5,9 +5,8 @@ def swap(s, a, b):
     if a.isdigit():
         i = [int(a), int(b)]
     else:
-        for l in range(len(s)):
-            if s[l] == a or s[l] == b:
-                i.append(l)
+        i.append(s.find(a))
+        i.append(s.find(b))
     return s[0:min(i)]+s[max(i)]+s[min(i)+1:max(i)]+s[min(i)]+s[max(i)+1:]
 
 def rot(s, dir, x):
@@ -17,8 +16,7 @@ def rot(s, dir, x):
         return s[x%len(s):]+s[:x%len(s)]
 
 def rotP(s, l):
-    for i in range(len(s)):
-        if s[i] == l: x = i+1
+    x = s.find(l)+1
     if x > 4:
         x += 1
     return rot(s, "right", x)
@@ -47,5 +45,3 @@ with open("21.in") as f:
             string = mv(string, int(l[2]), int(l[5]))
             
 print string
-
-print rotP("abcdefgh", "g")
