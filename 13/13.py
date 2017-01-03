@@ -16,6 +16,33 @@ for i in range(len(grid)):
 	for j in range(len(grid)):
 		grid[i].append(find_wall(i, j))
 
-grid[31][39] = u"\u2591"
+
+from collections import deque, defaultdict
+
+q = deque()
+q.append((1, 1))
+count = defaultdict(dict)
+count[1][1] = 0
+grid[1][1] = "+"
+
+while len(q) > 0:
+	x, y = q.popleft()
+	if (x, y) == (31, 39):
+		grid[x][y] = "O"
+		break
+	if x+1 < len(grid) and grid[x+1][y] == " ":
+		q.append((x+1, y))
+		count[x+1][y] = count[x][y] + 1
+	if y+1 < len(grid) and grid[x][y+1] == " ":
+		q.append((x, y+1))
+		count[x][y+1] = count[x][y] + 1
+	if x-1 >= 0 and grid[x-1][y] == " ":
+		q.append((x-1, y))
+		count[x-1][y] = count[x][y] + 1
+	if y-1 >= 0 and grid[x][y-1] == " ":
+		q.append((x, y-1))
+		count[x][y-1] = count[x][y] + 1
+	grid[x][y] = "+"
 
 pr_gr()
+print count[31][39]
